@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ember Studio — local preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ember.css">
+<style>
+  :root { --font-heading--family: 'Fraunces', Georgia, serif; --font-body--family: 'Instrument Sans', system-ui, sans-serif; }
+  body { margin: 0; background: #17100e; }
+  header.site { height: 68px; display: flex; align-items: center; justify-content: space-between; padding: 0 clamp(20px,5vw,72px); color: #f4ece2; font: 500 15px 'Instrument Sans', sans-serif; background: #17100e; }
+</style>
+</head>
+<body>
+<header class="site"><span>My Store</span><span>Shop &nbsp; Care &nbsp; Bag (0)</span></header>
+
+<ember-stage class="ember" data-three="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js">
+  <div class="ember__bg" aria-hidden="true"></div>
+  <div class="ember__view">
+    <canvas aria-hidden="true"></canvas>
+    <div class="ember__hud" aria-hidden="true"><span>Drag to rotate</span><span class="ember__hud-bar"><span class="ember__hud-dot" data-ember-dot></span></span><span class="ember__hud-deg" data-ember-deg>000°</span></div>
+  </div>
+  <div class="ember__steps">
+    <section class="ember__step ember__step--hero is-in" data-ember-step data-pose="diagonal">
+      <h1 class="ember__title" data-reveal>Heat, tamed.</h1>
+      <div class="ember__lede">
+        <p data-reveal style="--d:.12s">A heated comb that straightens as it glides. Smooth, frizz-free hair in the time it takes to brush it.</p>
+        <div class="ember__cta-row" data-reveal style="--d:.22s">
+          <a class="ember-btn" href="#">Shop the comb <svg viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7h24M19 1l6 6-6 6"/></svg></a>
+          <span class="ember__price">£39.99 · UK plug</span>
+        </div>
+      </div>
+    </section>
+    <section class="ember__step" data-ember-step data-pose="teeth">
+      <div class="ember__card">
+        <h2 data-reveal>Every tooth carries the heat.</h2>
+        <p data-reveal style="--d:.1s">Heated teeth reach the root and straighten section by section, while insulated tips keep the warmth away from your scalp and fingers.</p>
+      </div>
+    </section>
+    <section class="ember__step ember__step--right" data-ember-step data-pose="ions">
+      <div class="ember__card">
+        <h2 data-reveal>Ions that quiet the frizz.</h2>
+        <p data-reveal style="--d:.1s">Negative ions help cut down on static and flyaways, so hair settles smooth and keeps its natural volume.</p>
+      </div>
+    </section>
+    <section class="ember__step" data-ember-step data-pose="upright">
+      <div class="ember__card">
+        <h2 data-reveal>Set the heat to your hair.</h2>
+        <p data-reveal style="--d:.1s">A lower setting for fine hair, a higher one for thick, coily or curly hair.</p>
+        <div class="ember__heat" role="radiogroup" aria-label="Heat level" data-reveal style="--d:.2s">
+          <label><input type="radio" name="heat" value="0.15" data-level="0" data-ember-heat><span>Fine</span></label>
+          <label><input type="radio" name="heat" value="0.5" data-level="2" data-ember-heat checked><span>Wavy</span></label>
+          <label><input type="radio" name="heat" value="1" data-level="3" data-ember-heat><span>Coily &amp; curly</span></label>
+        </div>
+      </div>
+    </section>
+  </div>
+</ember-stage>
+
+<ember-ring class="ring" data-autoplay="true" data-speed="5" style="--ring-speed:5s">
+  <div class="ring__head">
+    <h2 class="ring__title">Five minutes, start to smooth.</h2>
+    <p class="ring__intro">The whole routine fits between your coffee and the front door. Drag the cards to walk through it.</p>
+  </div>
+  <div class="ring__stage" data-ring-stage tabindex="0" role="region" aria-roledescription="carousel" aria-label="The routine">
+    <article class="ring__card" data-ring-card data-label="Step 1: Prep"><span class="ring__num">1</span><div><h3>Prep</h3><p>Start with dry, detangled hair and apply a heat protectant.</p></div></article>
+    <article class="ring__card" data-ring-card data-label="Step 2: Set"><span class="ring__num">2</span><div><h3>Set the heat</h3><p>Choose a temperature to suit your hair type and let the comb warm up.</p></div></article>
+    <article class="ring__card" data-ring-card data-label="Step 3: Glide"><span class="ring__num">3</span><div><h3>Glide</h3><p>Work in small sections, combing slowly from root to tip.</p></div></article>
+    <article class="ring__card" data-ring-card data-label="Step 4: Cool"><span class="ring__num">4</span><div><h3>Cool down</h3><p>Switch it off and let it cool on a heat-safe surface before you put it away.</p></div></article>
+  </div>
+  <div class="ring__controls">
+    <button class="ring__icon" type="button" data-ring-prev aria-label="Previous"><svg viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M25 7H1M7 1L1 7l6 6"/></svg></button>
+    <div class="ring__ticks">
+      <button class="ring__tick" type="button" data-ring-tick="0" aria-label="Step 1"><span class="ring__bar"></span><span class="ring__label">01<b>&nbsp;&nbsp;Prep</b></span></button>
+      <button class="ring__tick" type="button" data-ring-tick="1" aria-label="Step 2"><span class="ring__bar"></span><span class="ring__label">02<b>&nbsp;&nbsp;Set the heat</b></span></button>
+      <button class="ring__tick" type="button" data-ring-tick="2" aria-label="Step 3"><span class="ring__bar"></span><span class="ring__label">03<b>&nbsp;&nbsp;Glide</b></span></button>
+      <button class="ring__tick" type="button" data-ring-tick="3" aria-label="Step 4"><span class="ring__bar"></span><span class="ring__label">04<b>&nbsp;&nbsp;Cool down</b></span></button>
+    </div>
+    <button class="ring__icon" type="button" data-ring-next aria-label="Next"><svg viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7h24M19 1l6 6-6 6"/></svg></button>
+  </div>
+  <span class="ring__sr" aria-live="polite" data-ring-live></span>
+</ember-ring>
+
+<section class="ember-cta">
+  <h2>Good hair, on tap.</h2>
+  <p>One comb, a UK plug, and tracked delivery to your door.</p>
+  <a class="ember-btn" href="#">Shop the comb — £39.99</a>
+  <ul class="ember-cta__facts"><li>UK 3-pin plug</li><li>Tracked delivery</li><li>360° swivel cord</li></ul>
+</section>
+
+<script type="module">import('./ember.js?v=' + Date.now());</script>
+</body>
+</html>
