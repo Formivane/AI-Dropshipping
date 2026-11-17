@@ -1,0 +1,65 @@
+{
+  "about": "Hard gate for a Shopify product listing. Input: JSON {\"title\", \"description\", \"price_gbp\", \"sample_verified\": bool}.",
+  "checks": [
+    {
+      "type": "max_chars",
+      "value": 70,
+      "field": "title",
+      "label": "title under 70 chars"
+    },
+    {
+      "type": "min_words",
+      "value": 60,
+      "field": "description",
+      "label": "description has substance"
+    },
+    {
+      "type": "max_words",
+      "value": 350,
+      "field": "description",
+      "label": "description not padded"
+    },
+    {
+      "type": "must_include_any",
+      "value": [
+        "working days",
+        "delivery",
+        "dispatched",
+        "arrives"
+      ],
+      "field": "description",
+      "label": "honest delivery time stated"
+    },
+    {
+      "type": "must_not_include",
+      "value": [
+        "salon results",
+        "salon-quality",
+        "professional results",
+        "guaranteed",
+        "clinically",
+        "dermatologist",
+        "no damage",
+        "damage-free",
+        "permanent",
+        "miracle",
+        "best on the market",
+        "free shipping worldwide"
+      ],
+      "label": "no unprovable claims (ASA/CAP)"
+    },
+    {
+      "type": "not_regex",
+      "value": "\\bUKCA\\b",
+      "field": "description",
+      "severity": "should",
+      "label": "only claim UKCA once the certificate is on file"
+    },
+    {
+      "type": "regex",
+      "value": "^true$",
+      "field": "sample_verified",
+      "label": "sample verified before listing goes live"
+    }
+  ]
+}

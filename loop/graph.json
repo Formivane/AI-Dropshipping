@@ -1,0 +1,131 @@
+{
+  "name": "Cheercrate Store (AI dropshipping)",
+  "goal": "Grow a frizz-free hair TikTok audience with honest, useful posts, then turn it into sales of products whose samples have been tested, on the Cheercrate Shopify store.",
+  "headline": [
+    "posts_ready",
+    "posts_published",
+    "tiktok_followers",
+    "store_sessions_30d",
+    "orders_90d",
+    "conversion_rate_30d"
+  ],
+  "metric_labels": {
+    "posts_ready": "TikTok posts ready",
+    "posts_published": "Posts published",
+    "tiktok_followers": "TikTok followers",
+    "store_sessions_30d": "Store sessions (30 days)",
+    "orders_90d": "Orders (90 days)",
+    "conversion_rate_30d": "Store conversion % (30 days)"
+  },
+  "nodes": [
+    {
+      "id": "trends",
+      "label": "Spot trends",
+      "kind": "agent",
+      "agent": "trend-scout",
+      "does": "Finds hair/frizz topics, hooks and formats doing well on UK TikTok now, with links as evidence",
+      "next": [
+        "content"
+      ]
+    },
+    {
+      "id": "content",
+      "label": "Make posts",
+      "kind": "agent",
+      "agent": "content-maker",
+      "does": "Writes carousel slides + caption into make_posts.py and content-plan.md; loops until rubric passes",
+      "next": [
+        "render"
+      ],
+      "improve": {
+        "metric": "saves_per_1k",
+        "type": "continuous",
+        "min_n": 8,
+        "window_days": 3
+      }
+    },
+    {
+      "id": "render",
+      "label": "Render slides",
+      "kind": "check",
+      "run": "tiktok-content/.venv/Scripts/python tiktok-content/make_posts.py",
+      "does": "Renders PNG slides + MP4 on George's PC (needs the Windows fonts)",
+      "next": [
+        "schedule"
+      ]
+    },
+    {
+      "id": "schedule",
+      "label": "Schedule",
+      "kind": "agent",
+      "agent": "scheduler",
+      "does": "Places posts into schedule.md slots (Sprout UK windows, later the account's own peak hours)",
+      "next": [
+        "post"
+      ]
+    },
+    {
+      "id": "post",
+      "label": "George posts",
+      "kind": "human",
+      "does": "Uploads in TikTok with a trending sound. Posting stays manual.",
+      "next": [
+        "measure"
+      ]
+    },
+    {
+      "id": "listing",
+      "label": "Write listings",
+      "kind": "agent",
+      "agent": "listing-writer",
+      "does": "Writes honest Shopify product copy from the verified sample notes; loops until rubric passes",
+      "next": [
+        "publish"
+      ],
+      "improve": {
+        "metric": "conversion_rate",
+        "type": "continuous",
+        "min_n": 6,
+        "window_days": 14
+      },
+      "level": 3
+    },
+    {
+      "id": "publish",
+      "label": "George publishes",
+      "kind": "human",
+      "does": "Approves copy, price and going live. No ad spend without George.",
+      "next": [
+        "measure"
+      ],
+      "level": 4
+    },
+    {
+      "id": "measure",
+      "label": "Measure",
+      "kind": "measure",
+      "agent": "tiktok-analyst",
+      "does": "Post stats 72h after posting (views, saves, follows) + Shopify sessions, conversion, orders",
+      "next": [
+        "improve"
+      ]
+    },
+    {
+      "id": "improve",
+      "label": "Self-improve",
+      "kind": "agent",
+      "agent": "improver",
+      "schedule": "weekly",
+      "does": "A/B tests one change to the content or listing instructions, judged on saves per 1,000 views or conversion",
+      "loop": [
+        "trends"
+      ]
+    }
+  ],
+  "notes": [
+    "All 3 products are ACTIVE with 0 stock before any sample has been checked. supplier-shortlist.md says to verify the samples (plug, heat, magnet strength) and the UKCA/CE paperwork first. George should decide whether they stay live.",
+    "51 store sessions and a 0% conversion rate in the last 30 days, and 1 order in 90 days. The store isn't ready for ads yet, so there's no ads node until a product is verified.",
+    "TikTok post stats aren't in any connector. The analyst reads TikTok Studio in the browser on George's PC, or George pastes the numbers in.",
+    "Apify's free monthly credit is used up until it resets, so trend research uses web search for now."
+  ]
+}

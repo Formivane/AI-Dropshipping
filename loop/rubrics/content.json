@@ -1,0 +1,13 @@
+{
+  "about": "Hard gate for one TikTok post. Input: JSON {\"folder\", \"caption\", \"slides\": [..], \"mentions_product\": bool}.",
+  "checks": [
+    {"type": "hashtags_between", "value": [3, 6], "field": "caption", "label": "3-6 hashtags"},
+    {"type": "must_include", "value": "#hairtok", "field": "caption", "label": "#hairtok present"},
+    {"type": "max_chars", "value": 300, "field": "caption", "label": "caption under 300 chars"},
+    {"type": "max_chars", "value": 160, "field": "caption", "severity": "should", "label": "caption under 160 chars"},
+    {"type": "must_not_include", "value": ["salon results", "salon-quality", "guaranteed", "permanent", "cure", "clinically", "dermatologist", "no damage", "damage-free", "i've used it for years", "miracle", "100%"], "label": "no unprovable or banned claims (ASA/CAP)"},
+    {"type": "not_regex", "value": "link in bio|shop now|comment brush", "field": "caption", "severity": "should", "label": "no hard sell before the store is ready"},
+    {"type": "min_words", "value": 12, "field": "slides", "label": "slides have real content"},
+    {"type": "max_words", "value": 260, "field": "slides", "label": "slides not walls of text"}
+  ]
+}
